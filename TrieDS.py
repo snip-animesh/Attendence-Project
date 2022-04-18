@@ -3,6 +3,7 @@ class Trie:
 
     def insert(self, word):
         current_node = self.head
+
         for ch in word:
             if ch not in current_node:
                 current_node[ch] = {}
@@ -11,13 +12,18 @@ class Trie:
 
     def search(self, word):
         current_node = self.head
+
         for ch in word:
             if ch not in current_node:
                 return False
             current_node = current_node[ch]
-        if '*' in current_node:
+        if "*" in current_node:
             return True
-        return False
+        else:
+            return False
+
+    # def printf(self):
+    #     print(self.head)
 
 
 if __name__ == "__main__":

@@ -10,7 +10,7 @@ encodeKnown = np.array(list(encodeKnown.values()))
 
 
 def getImage():
-    cap = cv.VideoCapture(0)
+    cap = cv.VideoCapture(1)
     while True:
         success, img = cap.read()
         cv.waitKey(1)
@@ -19,7 +19,6 @@ def getImage():
         if keyboard.is_pressed("esc"):
             break
         cv.imshow("webcam", img)
-        cv.waitKey(1)
     return imgS, img
 
 
@@ -49,6 +48,7 @@ for encodeFace, faceLoc in zip(encodesCurFrame, facesCurFrame):
     # print(faceDis)
     # find best match (lowest distance)
     matchIndex = np.argmin(faceDis)
+    print(matchIndex)
     if matches[matchIndex]:
         nameRoll = classNames[matchIndex].upper()
         name,roll=nameRoll.split('_')
@@ -59,6 +59,7 @@ for encodeFace, faceLoc in zip(encodesCurFrame, facesCurFrame):
         cv.putText(img, name, (x1 + 6, y2), cv.FONT_HERSHEY_COMPLEX, 1, (255, 255, 255), 2)
         cv.imshow("Detected Face", img)
         getAttendence(name,roll)
+        cv.waitKey(1)
 
 # cv.destroyAllWindows()
 cv.waitKey(0)
